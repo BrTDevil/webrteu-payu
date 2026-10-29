@@ -1,0 +1,1 @@
+{"code": 200, "status": "SUCCESS", "paymentResult": {"url": "https://secure.payu.ro/order/pay?ref=abc", "type": "redirect"}, "payuPaymentReference": "PAYU-R1", "merchantPaymentReference": "123-1"}

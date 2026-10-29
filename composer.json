@@ -1,0 +1,95 @@
+{
+    "name": "webrteu/payu",
+    "description": "PayU Romania (API v4) and PayU GPO Europe integration for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "romania",
+        "payu",
+        "payments"
+    ],
+    "homepage": "https://github.com/BrTDevil/webrteu-payu",
+    "authors": [
+        {
+            "name": "WeBRTeu",
+            "email": "pfa.razvan.bodnariu@gmail.com",
+            "homepage": "https://webrt.eu"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/console": "^12.0|^13.0",
+        "illuminate/database": "^12.0|^13.0",
+        "illuminate/http": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0",
+        "webrteu/payments": "^0.1"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.13",
+        "laravel/pint": "^1.32",
+        "orchestra/testbench": "^10.0|^11.0",
+        "peckphp/peck": "^0.3",
+        "pestphp/pest": "^3.8|^4.7",
+        "pestphp/pest-plugin-laravel": "^3.2|^4.1",
+        "pestphp/pest-plugin-type-coverage": "^3.6|^4.0.4",
+        "phpstan/phpstan": "^2.3.3,!=2.3.4",
+        "rector/rector": "^2.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "WeBRTeu\\PayU\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WeBRTeu\\PayU\\Tests\\": "tests/"
+        },
+        "files": [
+            "tests/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WeBRTeu\\PayU\\PayUServiceProvider"
+            ],
+            "aliases": {
+                "PayU": "WeBRTeu\\PayU\\Facades\\PayU"
+            }
+        }
+    },
+    "scripts": {
+        "setup": "@composer install",
+        "lint": [
+            "rector",
+            "pint --parallel"
+        ],
+        "test:lint": [
+            "pint --parallel --test",
+            "rector --dry-run"
+        ],
+        "test:spelling": "peck",
+        "test:type-coverage": "pest --type-coverage --min=100",
+        "test:types": "phpstan analyse --memory-limit=1G",
+        "test:arch": "pest tests/Arch",
+        "test:unit": "XDEBUG_MODE=coverage pest --parallel --coverage --exactly=100.0",
+        "test:unit:sequential": "XDEBUG_MODE=coverage pest --coverage --exactly=100.0",
+        "test": [
+            "@test:lint",
+            "@test:spelling",
+            "@test:type-coverage",
+            "@test:types",
+            "@test:arch",
+            "@test:unit"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
